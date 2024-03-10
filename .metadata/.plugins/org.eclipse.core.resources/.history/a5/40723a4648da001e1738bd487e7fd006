@@ -1,0 +1,27 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import com.mysql.cj.jdbc.JdbcStatement;
+
+public class jdbcconnection {
+
+	public static void main(String[] args) throws SQLException {
+		// TODO Auto-generated method stub
+		String host="127.0.0.1";
+		String port="3306";
+
+		Connection con=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/qadbt","root", "Foot");
+		//Connection url is stricky part
+		// "jdbc:mysql://"+host+":"+port+"/databasename";
+		Statement s=con.createStatement();   //Create path
+		ResultSet rs=s.executeQuery("select * from credentials where scenerio='zerobalancecard'");
+		rs.next();   //move pointer from base index to first index
+		System.out.println(rs.getString("username"));
+		System.out.println(rs.getString("password"));
+		
+	}
+
+}
